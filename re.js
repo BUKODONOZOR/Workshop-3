@@ -15,3 +15,5 @@ connection.query('SELECT * users', (error, results, fields) => {
     console.log('Resultados de la consulta: ', results);
   });
 let  basededatos= [];
+
+//1
