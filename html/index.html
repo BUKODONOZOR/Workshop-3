@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Mi Página</h1>
+    
+    <!-- Agregar un botón para enviar mensajes al servidor -->
+    <button id="btnEnviar">Enviar mensaje al servidor</button>
+
+    <script>
+        // Espera a que el DOM esté completamente cargado
+        document.addEventListener("DOMContentLoaded", () => {
+            // Conexión WebSocket al servidor
+            const ws = new WebSocket("ws://localhost:5500");
+
+            // Escucha mensajes del servidor
+            ws.onmessage = (event) => {
+                console.log("Mensaje del servidor:", event.data);
+            };
+
+            // Obtén referencia al botón después de que el DOM esté cargado
+            const btnEnviar = document.getElementById("btnEnviar");
+
+            // Verifica si el botón existe
+            if (btnEnviar) {
+                // Agrega un evento clic al botón
+                btnEnviar.addEventListener("click", () => {
+                    const mensaje = prompt("Igrese el mensaje")
+                    console.log("Mensaje enviado al servidor:", mensaje);
+                    ws.send(mensaje.toString());
+                });
+            } else {
+                console.error("El botón 'btnEnviar' no se encontró.");
+            }
+        });
+    </script>
+</body>
+</body>
+</html>
